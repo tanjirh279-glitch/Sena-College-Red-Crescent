@@ -63,8 +63,8 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
   // Feedback copies
   const [feedbacks, setFeedbacks] = useState(siteContent.feedbacks || []);
 
-  // Active admin tabs: 'registrations' | 'edit-content' | 'sheets-sync'
-  const [activeTab, setActiveTab] = useState<'registrations' | 'edit-content' | 'sheets-sync'>('registrations');
+  // Active admin tabs: 'registrations' | 'edit-content' | 'sheets-sync' | 'publish-share'
+  const [activeTab, setActiveTab] = useState<'registrations' | 'edit-content' | 'sheets-sync' | 'publish-share'>('publish-share');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
 
@@ -83,6 +83,7 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveSuccessMessage, setSaveSuccessMessage] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   // Check existing session token in localStorage on mount
   useEffect(() => {
@@ -359,8 +360,20 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
           <div className="flex flex-wrap gap-2 items-center">
             <button
+              onClick={() => setActiveTab('publish-share')}
+              className={`px-4 py-1.5 rounded-lg text-sm cursor-pointer transition ${
+                activeTab === 'publish-share' 
+                  ? 'bg-red-600 text-white font-medium' 
+                  : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
+              }`}
+            >
+              <Share2 className="w-4 h-4 inline mr-1.5" />
+              Publish & Share
+            </button>
+
+            <button
               onClick={() => setActiveTab('registrations')}
-              className={`px-4 py-1.5 rounded-lg text-sm transition ${
+              className={`px-4 py-1.5 rounded-lg text-sm cursor-pointer transition ${
                 activeTab === 'registrations' 
                   ? 'bg-red-600 text-white font-medium' 
                   : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
@@ -372,7 +385,7 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
             <button
               onClick={() => setActiveTab('edit-content')}
-              className={`px-4 py-1.5 rounded-lg text-sm transition ${
+              className={`px-4 py-1.5 rounded-lg text-sm cursor-pointer transition ${
                 activeTab === 'edit-content' 
                   ? 'bg-red-600 text-white font-medium' 
                   : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
@@ -384,7 +397,7 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
             <button
               onClick={() => setActiveTab('sheets-sync')}
-              className={`px-4 py-1.5 rounded-lg text-sm transition ${
+              className={`px-4 py-1.5 rounded-lg text-sm cursor-pointer transition ${
                 activeTab === 'sheets-sync' 
                   ? 'bg-red-600 text-white font-medium' 
                   : 'bg-zinc-800 text-zinc-300 hover:bg-zinc-700'
@@ -396,7 +409,7 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
             <button
               onClick={handleLogout}
-              className="px-3 py-1.5 bg-zinc-950 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-lg text-sm transition border border-zinc-800"
+              className="px-3 py-1.5 bg-zinc-950 hover:bg-zinc-800 text-zinc-400 hover:text-white rounded-lg text-sm cursor-pointer transition border border-zinc-800"
               title="Logout session"
             >
               <LogOut className="w-4 h-4" />
@@ -404,7 +417,7 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
 
             <button
               onClick={onClose}
-              className="px-3 py-1.5 bg-zinc-800 hover:bg-zinc-750 text-white rounded-lg text-sm transition"
+              className="px-3 py-1.5 bg-zinc-805 hover:bg-zinc-700 text-white rounded-lg text-sm cursor-pointer transition border border-zinc-700"
             >
               View Live Site ➔
             </button>
@@ -1350,6 +1363,136 @@ export default function AdminDashboard({ onClose, siteContent, onRefreshContent 
   }
 }`}
                   </pre>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        )}
+
+        {/* TAB 4: Publish & Share Website */}
+        {activeTab === 'publish-share' && (
+          <div className="space-y-6 max-w-4xl mx-auto animate-fade-in text-left">
+            {/* Header / Intro Card */}
+            <div className="bg-[#121212] border border-white-5 rounded-2xl p-6 sm:p-8 space-y-4">
+              <div className="flex items-center space-x-3 text-[#E01A22]">
+                <Globe className="w-8 h-8 animate-pulse" />
+                <div>
+                  <h3 className="text-xl font-bold text-white font-sans">Official Public Link Launcher</h3>
+                  <p className="text-xs text-zinc-400">Share your website safely with Sena Public School & College students, parents, and volunteers.</p>
+                </div>
+              </div>
+
+              <div className="w-full bg-[#080808] border border-white-5 rounded-2xl p-4 sm:p-6 space-y-4">
+                <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest block font-bold leading-none">
+                  YOUR VERIFIED USER-FACING OFFICIAL WEBSITE URL
+                </span>
+                
+                <div className="flex flex-col sm:flex-row gap-3 items-stretch">
+                  <div className="flex-1 bg-zinc-950 px-4 py-3 rounded-xl border border-zinc-800 flex items-center text-sm font-mono text-emerald-400 select-all overflow-x-auto whitespace-nowrap">
+                    https://ais-pre-ktwgylp46eujtjiibf5egd-932517840606.asia-east1.run.app
+                  </div>
+                  
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText('https://ais-pre-ktwgylp46eujtjiibf5egd-932517840606.asia-east1.run.app');
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 3000);
+                    }}
+                    className="bg-[#E01A22] hover:bg-[#E01A22]/90 text-white font-semibold px-6 py-3 rounded-xl transition duration-150 flex items-center justify-center space-x-2 text-sm select-none cursor-pointer"
+                  >
+                    {copied ? (
+                      <>
+                        <CheckCircle className="w-4 h-4 text-white animate-bounce" />
+                        <span>Copied Link!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Share2 className="w-4 h-4" />
+                        <span>Copy Public Link</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                <div className="pt-2 border-t border-zinc-900 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+                  <div className="text-xs text-zinc-500 flex items-center space-x-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 block"></span>
+                    <span>Direct public ingress link active and live.</span>
+                  </div>
+                  <a
+                    href="https://ais-pre-ktwgylp46eujtjiibf5egd-932517840606.asia-east1.run.app"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#E01A22] hover:underline text-xs font-semibold flex items-center space-x-1"
+                  >
+                    <span>Test Launch Clean Public Site ➔</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Privacy Shield Info block */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              {/* Privacy Column */}
+              <div className="bg-[#121212] border border-[#E01A22]/20 rounded-2xl p-6 sm:p-8 space-y-4">
+                <div className="flex items-center space-x-2 text-[#E01A22] font-semibold text-sm font-mono tracking-wider">
+                  <Shield className="w-5 h-5" />
+                  <span>VISITOR PRIVACY PROTECTED</span>
+                </div>
+                
+                <h4 className="text-base font-bold text-white font-sans">No Dev Chat or Logs Visible</h4>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  When visitors access the verified public link above, the page is rendered in standalone production mode:
+                </p>
+
+                <ul className="space-y-4 text-xs text-zinc-300">
+                  <li className="flex items-start">
+                    <span className="text-[#E01A22] mr-2 font-bold font-mono">✓</span>
+                    <span><strong>Absolute Privacy</strong>: The AI Coding chat assistant, workspace code files, and server developer logs are completely excluded. No one can see any developer tools or previous logs.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-[#E01A22] mr-2 font-bold font-mono">✓</span>
+                    <span><strong>Staff Credentials Protection</strong>: The secure Staff Portal remains locked. Only people who know the security key can access applicant submissions or change the text.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-[#E01A22] mr-2 font-bold font-mono">✓</span>
+                    <span><strong>Encryption</strong>: Student IDs, phones, and Statement-of-Purpose motivations are securely kept stored on backend storage.</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* public vs admin checklist */}
+              <div className="bg-[#121212] border border-zinc-800 rounded-2xl p-6 sm:p-8 space-y-4">
+                <h4 className="text-sm font-mono tracking-wider font-semibold uppercase text-zinc-400">Security Guard Policy</h4>
+                <div className="space-y-6">
+                  
+                  {/* Public sees */}
+                  <div className="space-y-2">
+                    <span className="text-[10px] text-zinc-500 block uppercase tracking-widest font-mono font-bold leading-none">What the Public Sees</span>
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      <span className="bg-zinc-950 text-zinc-300 text-[11px] border border-zinc-900 px-3 py-1.5 rounded-lg">SPSCRCS Landing Page</span>
+                      <span className="bg-zinc-950 text-zinc-300 text-[11px] border border-zinc-900 px-3 py-1.5 rounded-lg">Membership Sign Up Form</span>
+                      <span className="bg-zinc-950 text-zinc-300 text-[11px] border border-zinc-900 px-3 py-1.5 rounded-lg">Teacher & Leadership Roles</span>
+                      <span className="bg-zinc-950 text-zinc-300 text-[11px] border border-zinc-900 px-3 py-1.5 rounded-lg">Verified Public Feedback</span>
+                    </div>
+                  </div>
+
+                  {/* Kept private */}
+                  <div className="space-y-2 pt-4 border-t border-zinc-900">
+                    <span className="text-[10px] text-[#E01A22] block uppercase tracking-widest font-mono font-bold leading-none">What is kept 100% Confidential</span>
+                    <div className="flex flex-wrap gap-1.5 pt-1">
+                      <span className="bg-[#E01A22]/5 text-red-400 text-[11px] border border-[#E01A22]/15 px-3 py-1.5 rounded-lg">Recruit Records List</span>
+                      <span className="bg-[#E01A22]/5 text-red-400 text-[11px] border border-[#E01A22]/15 px-3 py-1.5 rounded-lg">CSV Student Spreadsheets</span>
+                      <span className="bg-[#E01A22]/5 text-red-400 text-[11px] border border-[#E01A22]/15 px-3 py-1.5 rounded-lg">Google Workspace Scripts & Keys</span>
+                      <span className="bg-[#E01A22]/5 text-red-400 text-[11px] border border-[#E01A22]/15 px-3 py-1.5 rounded-lg">Website Content Editors</span>
+                      <span className="bg-[#E01A22]/5 text-red-400 text-[11px] border border-[#E01A22]/15 px-3 py-1.5 rounded-lg">AI Coding Assistant Chat</span>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
