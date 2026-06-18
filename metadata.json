@@ -1,0 +1,6 @@
+{
+  "name": "SPSC Red Crescent",
+  "description": "The official portal for Sena Public School and College Red Crescent Society (SPSCRCS), featuring volunteer registrations, active events, and a secure internal administration system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

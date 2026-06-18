@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "title": "SPSC RED CRESCENT",
+    "subtitle": "SENA PUBLIC SCHOOL AND COLLEGE RED CRESCENT SOCIETY",
+    "tagline": "Lead. Serve. Inspire."
+  },
+  "about": "SPSC Red Crescent Society (SPSCRCS) is a newly established student volunteer initiative dedicated to humanity, leadership, community service, teamwork, first-aid awareness, and positive social impact.\n\nWe aim to assist in emergency preparedness and foster a lifelong spirit of volunteerism and responsible citizenship among active youth.",
+  "whyJoin": [
+    {
+      "id": "wj-1",
+      "emoji": "❤️",
+      "title": "Serve Humanity",
+      "description": "Engage in direct community welfare activities and stand beside those in times of critical need."
+    },
+    {
+      "id": "wj-2",
+      "emoji": "🩹",
+      "title": "Learn First Aid",
+      "description": "Acquire certified emergency response and life-saving first aid skills that prepare you for real-world scenarios."
+    },
+    {
+      "id": "wj-3",
+      "emoji": "🌍",
+      "title": "Create Social Impact",
+      "description": "Lead and participate in environmental cleaning campaigns, health awareness drives, and humanitarian aid."
+    },
+    {
+      "id": "wj-4",
+      "emoji": "🤝",
+      "title": "Build Leadership",
+      "description": "Take responsibility for managing volunteer units, organizing massive-scale events, and speaking publicly."
+    },
+    {
+      "id": "wj-5",
+      "emoji": "✨",
+      "title": "Grow With Teamwork",
+      "description": "Join a group of passionate peers, build lasting friendships, and learn how to collaborate effectively."
+    },
+    {
+      "id": "wj-6",
+      "emoji": "🚀",
+      "title": "Develop Future Skills",
+      "description": "Develop critical communication, organizational, emergency planning, and career-boosting soft skills."
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-1",
+      "title": "Community Service",
+      "description": "Actively participating in cleanup, distribution, and local school support programs.",
+      "iconName": "HeartHandshake"
+    },
+    {
+      "id": "act-2",
+      "title": "Volunteer Training",
+      "description": "Comprehensive workshops preparing students to handle volunteer operations and emergency response.",
+      "iconName": "GraduationCap"
+    },
+    {
+      "id": "act-3",
+      "title": "First Aid Awareness",
+      "description": "Teaching core medical, rescue guidance, and disaster safety standards within our campus.",
+      "iconName": "Activity"
+    },
+    {
+      "id": "act-4",
+      "title": "Blood Donation Support",
+      "description": "Coordinating and boosting awareness for safe blood donation sessions to support hospitals.",
+      "iconName": "Droplet"
+    },
+    {
+      "id": "act-5",
+      "title": "Youth Development",
+      "description": "Fostering active student leaders who manage clubs, command respect, and act as role models.",
+      "iconName": "Sparkles"
+    }
+  ],
+  "feedbacks": [],
+  "leadership": {
+    "teacher": {
+      "name": "Kaizer Muhammad Bhuiyan",
+      "role": "Teacher in Charge",
+      "contact": "+880 1811-143652"
+    },
+    "unitLeader": "Coming Soon",
+    "teamLeaders": "Coming Soon",
+    "executiveTeam": "Coming Soon"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/share/1FBmLACNvD/",
+    "instagram": "https://www.instagram.com/spscredcrescent",
+    "whatsapp": "01335113532"
+  },
+  "googleSheetsUrl": "",
+  "gmailEnabled": false,
+  "gmailSubject": "Sena College Red Crescent Admission Status",
+  "gmailBody": "Dear {applicant_name},\n\nWe are pleased to inform you that your registration for the Sena Public School & College Red Crescent Youth unit (Student ID: {student_id}) has been processed.\n\nStatus: {status}\n\nThank you for your enthusiasm to serve, learn, and lead with us!\n\nSPSC Red Crescent Youth Unit"
+}
